@@ -7,7 +7,7 @@ import io.ktor.http.append
 object Endpoints {
 
     const val BASE_URL = "https://pixabay.com/api/"
-
+//    const val BASE_URL2 = BuildConfig()
     fun SEARCH_API() =
         URLBuilder(BASE_URL).apply {
             parameters.append("key", "43409992-11eeedaf8c3426666fa1dfb6d")

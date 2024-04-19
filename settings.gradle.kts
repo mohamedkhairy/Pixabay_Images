@@ -21,6 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Pixabay Images"
 include(":app")
-include(":core",":core:network",":core:database",":core:utils")
-include(":features", ":features:home")
-include(":core:ui")
+include(":core",":core:network",":core:database",":core:utils", ":core:ui")
+include(":features", ":features:home", ":features:Details")
