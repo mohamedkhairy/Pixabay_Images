@@ -2,9 +2,7 @@ package com.example.utils.utils
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 
 inline fun <ResultType, RequestType> cachingHandler(
     crossinline localSource: () -> Flow<ResultType>,
@@ -17,14 +15,14 @@ inline fun <ResultType, RequestType> cachingHandler(
 //    val flow = if (shouldFetch(data)) {
 //        emit(data)
 
-        val data = try {
-            val remoteData = remoteSource()
-            saveResult(remoteData)
-            localSource()
-        } catch (throwable: Throwable) {
-            throwable.printStackTrace()
-            localSource()
-        }
+    val data = try {
+        val remoteData = remoteSource()
+        saveResult(remoteData)
+        localSource()
+    } catch (throwable: Throwable) {
+        throwable.printStackTrace()
+        localSource()
+    }
 //    } else {
 //        query().map { it }
 //    }

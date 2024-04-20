@@ -12,30 +12,19 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 
 abstract class FlowUseCase<in Params, Result>(private val coroutineDispatcher: CoroutineDispatcher) {
-  @ExperimentalCoroutinesApi
-  suspend operator fun invoke(parameters: Params): Flow<UiState<Result>> =
-    execute(parameters)
-      .obtainOutcome()
-      .flowOn(coroutineDispatcher)
+    @ExperimentalCoroutinesApi
+    suspend operator fun invoke(parameters: Params): Flow<Result> =
+        execute(parameters)
+            .flowOn(coroutineDispatcher)
 
-  protected abstract suspend fun execute(parameters: Params): Flow<Result>
-}
-
-abstract class FlowUseCase2<in Params, Result>(private val coroutineDispatcher: CoroutineDispatcher) {
-  @ExperimentalCoroutinesApi
-  suspend operator fun invoke(parameters: Params): Flow<Result> =
-    execute(parameters)
-      .flowOn(coroutineDispatcher)
-
-  protected abstract suspend fun execute(parameters: Params): Flow<Result>
+    protected abstract suspend fun execute(parameters: Params): Flow<Result>
 }
 
 
 fun <T> Flow<T>.obtainOutcome(): Flow<UiState<T>> =
-  this.map { UiState.success(it) }
-  .onStart { emit(UiState.Loading(true)) }
-  .catch { e ->
-    Log.d("xxx", "catch")
-    emit(UiState.Error(e))
-  }
-  .onCompletion { emit(UiState.Loading(false)) }
+    this.map { UiState.success(it) }
+        .onStart { emit(UiState.Loading(true)) }
+        .catch { e ->
+            emit(UiState.Error(e))
+        }
+        .onCompletion { emit(UiState.Loading(false)) }

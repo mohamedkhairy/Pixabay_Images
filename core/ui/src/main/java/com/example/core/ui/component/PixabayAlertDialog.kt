@@ -31,8 +31,6 @@ fun PixabayInfoDialog(
             dismissButton = {
                 TextButton(onClick = {
                     onCancel()
-                    Log.d("xxx", "Cancel -> ${isDialogVisible}")
-//                    isDialogVisible = false
                 }) {
                     Text(text = "Cancel")
                 }

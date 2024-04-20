@@ -46,7 +46,7 @@ coilVersion = "2.6.0"
 # Utils
 javaInject = "1"
 material = "1.11.0"
-
+gsonVersion = "2.8.8"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -74,6 +74,7 @@ androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "life
 kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 coroutinesAndroid = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinCoroutines" }
+
 
 # Arch Components
 viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
@@ -106,6 +107,7 @@ coil-compose = {module = "io.coil-kt:coil-compose", version.ref = "coilVersion"}
 
 # Utils
 javaInject = { module = "javax.inject:javax.inject", version.ref = "javaInject" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
 
 #TESTING
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }

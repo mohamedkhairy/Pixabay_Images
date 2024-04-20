@@ -1,25 +1,15 @@
 package com.example.network.di
 
-import androidx.core.os.BuildCompat
+import com.example.pixabayimages.core.network.BuildConfig
 import io.ktor.http.URLBuilder
-import io.ktor.http.append
 
 object Endpoints {
 
-    const val BASE_URL = "https://pixabay.com/api/"
-//    const val BASE_URL2 = BuildConfig()
+    const val BASE_URL = BuildConfig.BASE_URL
+
     fun SEARCH_API() =
         URLBuilder(BASE_URL).apply {
-            parameters.append("key", "43409992-11eeedaf8c3426666fa1dfb6d")
+            parameters.append("key", BuildConfig.API_KEY)
         }.build()
 
-
-
-
-    // ?key=43409992-11eeedaf8c3426666fa1dfb6d
-    // &
-    // q=yellow+flowers&image_type=photo&pretty=true
-
-
-//            https://pixabay.com/api/?key=43409992-11eeedaf8c3426666fa1dfb6d&q=yellow+flowers&image_type=photo&pretty=true
 }

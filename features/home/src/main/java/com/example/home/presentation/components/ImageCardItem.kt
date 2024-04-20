@@ -2,7 +2,11 @@ package com.example.home.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,46 +21,46 @@ import com.example.utils.model.Hit
 @Composable
 fun ImageCardItem(
     imageHit: Hit,
-    openDetails:  (Hit) -> Unit
+    openDetails: (Hit) -> Unit
 ) {
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable {openDetails(imageHit)}
+            .clickable { openDetails(imageHit) }
     ) {
 
-            Column(
-                Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.Center
+        Column(
+            Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.Center
+        )
+        {
+
+            Image(
+                painter = CoilImagePainter(imageUrl = imageHit.previewURL),
+                contentDescription = "user image",
+                modifier = Modifier
+                    .size(150.dp, 150.dp)
+                    .padding(8.dp)
+                    .align(Alignment.CenterHorizontally)
             )
-            {
 
-                Image(
-                    painter = CoilImagePainter(imageUrl = imageHit.previewURL),
-                    contentDescription = "user image",
-                    modifier = Modifier
-                        .size(150.dp, 150.dp)
-                        .padding(8.dp)
-                        .align(Alignment.CenterHorizontally)
-                )
-
-                    Text(
-                        text = imageHit.user,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(8.dp)
-                    )
+            Text(
+                text = imageHit.user,
+                color = MaterialTheme.colorScheme.primary,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(8.dp)
+            )
 
 
-                    Text(
-                        text = imageHit.tags,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontSize = 12.sp,
-                        maxLines = 1,
-                        modifier = Modifier.padding(8.dp)
-                    )
+            Text(
+                text = imageHit.tags,
+                color = MaterialTheme.colorScheme.primary,
+                fontSize = 12.sp,
+                maxLines = 1,
+                modifier = Modifier.padding(8.dp)
+            )
 
 
         }

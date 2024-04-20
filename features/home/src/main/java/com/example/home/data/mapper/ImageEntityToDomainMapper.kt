@@ -1,12 +1,13 @@
 package com.example.home.data.mapper
 
 import com.example.database.entity.HitCachedEntity
-import com.example.utils.model.Hit
 import com.example.utils.mapper.BaseMapper
+import com.example.utils.model.Hit
 import javax.inject.Inject
 
 
-class ImageEntityToDomainMapper @Inject constructor(): BaseMapper<List<HitCachedEntity>, List<Hit>> {
+class ImageEntityToDomainMapper @Inject constructor() :
+    BaseMapper<List<HitCachedEntity>, List<Hit>> {
     override fun map(model: List<HitCachedEntity>): List<Hit> =
         model.map {
             Hit(

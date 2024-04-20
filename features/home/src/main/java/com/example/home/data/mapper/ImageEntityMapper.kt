@@ -6,7 +6,8 @@ import com.example.utils.mapper.BaseMapper
 import javax.inject.Inject
 
 
-class ImageEntityMapper @Inject constructor(): BaseMapper<ImageResultResponse, List<HitCachedEntity>?> {
+class ImageEntityMapper @Inject constructor() :
+    BaseMapper<ImageResultResponse, List<HitCachedEntity>?> {
     override fun map(model: ImageResultResponse): List<HitCachedEntity>? =
         model.hitResponses?.map {
             HitCachedEntity(

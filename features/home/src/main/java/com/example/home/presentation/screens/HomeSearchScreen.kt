@@ -1,8 +1,13 @@
 package com.example.home.presentation.screens
 
 import android.util.Log
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -11,20 +16,26 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.core.ui.component.AppLoading
 import com.example.core.ui.component.PixabayInfoDialog
 import com.example.home.presentation.components.ImageCardItem
-import com.example.utils.model.Hit
 import com.example.utils.core.ActionState
 import com.example.utils.core.UiState
 import com.example.utils.core.toJsonString
+import com.example.utils.model.Hit
 
 
 @Composable
@@ -43,7 +54,7 @@ internal fun HomeSearchRoute(
         onImageClick = onImageClick,
         modifier = modifier,
         actionState = actionState,
-        searchQuery= searchQuery,
+        searchQuery = searchQuery,
         searchResultUiState = searchResultUiState,
         onSearchQueryChanged = searchViewModel::onSearchQueryChanged,
         onActionStateChanged = searchViewModel::onActionStateChanged
@@ -63,7 +74,6 @@ fun HomeSearchScreen(
 
     ) {
     var searchText by remember { mutableStateOf(searchQuery) }
-//    val images by remember { mutableStateOf<List<String>>(emptyList()) }
 
     Column(
         modifier = Modifier
@@ -96,13 +106,11 @@ fun HomeSearchScreen(
 
             is UiState.Error -> {
                 searchResultUiState.throwable?.printStackTrace()
-                Log.d("xxx", "Errorrrr")
-
+                ViewStateMessage("can't find any result")
             }
 
             is UiState.Ideal -> {
-                Log.d("xxx", "Ideal View")
-
+                ViewStateMessage("Please, enter at least 2 chars")
             }
 
             is UiState.Loading -> {
@@ -110,17 +118,16 @@ fun HomeSearchScreen(
             }
 
             is UiState.Success -> {
-                Log.d("xxx", "Success")
-
-                searchResultUiState.data?.let {
+                if (searchResultUiState.data.isNullOrEmpty()) {
+                    ViewStateMessage("can't find any result")
+                } else {
                     SearchResultView(
-                        onImageClick= onImageClick,
+                        onImageClick = onImageClick,
                         actionState = actionState,
-                        imagesList = it,
+                        imagesList = searchResultUiState.data!!,
                         onActionStateChanged = onActionStateChanged
                     )
-                } ?: run {
-                    Log.d("xxx", "Empty Ideal View")
+
                 }
             }
 
@@ -144,7 +151,7 @@ internal fun SearchResultView(
 
     ) {
         items(items = imagesList) { imageHit ->
-            ImageCardItem(imageHit= imageHit, openDetails = {
+            ImageCardItem(imageHit = imageHit, openDetails = {
                 onActionStateChanged(ActionState.ACTION)
             })
             when (actionState) {
@@ -154,6 +161,7 @@ internal fun SearchResultView(
                         goToImageDetails = {},
                         onCancel = {})
                 }
+
                 ActionState.ACTION -> {
                     PixabayInfoDialog(
                         goToImageDetails = {
@@ -169,6 +177,20 @@ internal fun SearchResultView(
     }
 }
 
+@Composable
+fun ViewStateMessage(msg: String) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = msg,
+            fontSize = 20.sp,
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
+}
 
 @Preview
 @Composable

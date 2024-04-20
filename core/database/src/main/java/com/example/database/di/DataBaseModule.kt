@@ -16,7 +16,7 @@ object DataBaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context) : DatabaseManager =
+    fun provideDatabase(@ApplicationContext context: Context): DatabaseManager =
         Room.databaseBuilder(context, DatabaseManager::class.java, "pixabay_database")
             .build()
 

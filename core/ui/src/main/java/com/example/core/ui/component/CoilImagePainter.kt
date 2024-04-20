@@ -21,7 +21,6 @@ fun CoilImagePainter(imageUrl: String): AsyncImagePainter {
         model = ImageRequest.Builder(LocalContext.current)
             .error(android.R.drawable.ic_delete)
             .data(imageUrl)
-            .size(200)
             .crossfade(true)
             .crossfade(200)
             .build()

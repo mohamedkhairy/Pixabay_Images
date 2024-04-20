@@ -11,15 +11,15 @@ import kotlinx.coroutines.Dispatchers
 @InstallIn(SingletonComponent::class)
 object DispatcherModule {
 
-  @Provides
-  @DefaultDispatcher
-  fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+    @Provides
+    @DefaultDispatcher
+    fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
-  @Provides
-  @IoDispatcher
-  fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+    @Provides
+    @IoDispatcher
+    fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
-  @Provides
-  @MainDispatcher
-  fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+    @Provides
+    @MainDispatcher
+    fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 }

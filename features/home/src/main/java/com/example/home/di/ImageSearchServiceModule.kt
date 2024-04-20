@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 
 @Module
 @InstallIn(ViewModelComponent::class)

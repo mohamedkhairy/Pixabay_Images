@@ -1,9 +1,9 @@
 package com.example.utils.core
 
-sealed class MenuAction(val event: String){
+sealed class MenuAction(val event: String) {
 
-    object All: MenuAction(event = "All")
+    object All : MenuAction(event = "All")
 
-    object Favorites: MenuAction(event = "Favorites")
+    object Favorites : MenuAction(event = "Favorites")
 
 }

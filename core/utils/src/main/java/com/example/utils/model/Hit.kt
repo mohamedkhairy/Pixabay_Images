@@ -27,4 +27,4 @@ data class Hit(
     val webformatHeight: Int,
     val webformatURL: String,
     val webformatWidth: Int
-): Parcelable
+) : Parcelable

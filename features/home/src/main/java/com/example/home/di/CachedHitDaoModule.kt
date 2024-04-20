@@ -15,7 +15,7 @@ object CachedHitDaoModule {
 
     @Provides
     @Singleton
-    fun provideCachedHitDao(database: DatabaseManager) : HitDao =
+    fun provideCachedHitDao(database: DatabaseManager): HitDao =
         database.cachedHitDao()
 
 }

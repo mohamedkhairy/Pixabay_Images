@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kapt)
     alias(libs.plugins.hilt)
+    id("kotlin-parcelize")
 }
 
 apply("../config.gradle.kts")
@@ -74,6 +75,7 @@ dependencies {
     implementation(project(":core:utils"))
     implementation(project(":core:ui"))
     implementation(project(":features:home"))
+    implementation(project(":features:Details"))
 
 
 

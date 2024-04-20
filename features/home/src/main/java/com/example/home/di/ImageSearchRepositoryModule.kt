@@ -21,8 +21,8 @@ object ImageSearchRepositoryModule {
         hitDao: HitDao,
         entityMapper: ImageEntityMapper,
         entityDomainMapper: ImageEntityToDomainMapper,
-    ) : ImageSearchRepository =
-         ImageSearchRepositoryImp(service, hitDao, entityMapper, entityDomainMapper)
+    ): ImageSearchRepository =
+        ImageSearchRepositoryImp(service, hitDao, entityMapper, entityDomainMapper)
 
 
 }
